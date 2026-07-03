@@ -41,7 +41,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- 补充GPG配置（Actions中注入密钥时用） -->
     <gpg.executable>gpg</gpg.executable>
-    <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
     <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
   </properties>
 
@@ -124,9 +123,12 @@
         </executions>
         <configuration>
           <executable>${gpg.executable}</executable>
-          <keyname>${gpg.keyname}</keyname>
           <passphrase>${gpg.passphrase}</passphrase>
           <useAgent>false</useAgent>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
         </configuration>
       </plugin>
 
